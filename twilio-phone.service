@@ -1,0 +1,25 @@
+# move into /etc/systemd/system/twilio-phone.service
+# then:
+# sudo systemctl daemon-reload
+
+[Unit]
+Description=twilio-phone
+# Documentation=https://example.com
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Environment=NODE_ENV=production
+Type=simple
+#User=nobody
+#Group=nogroup
+DynamicUser=true
+WorkingDirectory=/path-to-app
+ExecStart=/usr/local/bin/node /path-to-app/bin/www
+
+Restart=on-failure
+StandardOutput=file:/path-to-app/log/out.log
+StandardError=file:/path-to-app/log/err.log
+
+[Install]
+WantedBy=multi-user.target
